@@ -3,6 +3,7 @@ const cards = document.querySelectorAll(".card-inner");
 const gameoverScreen = document.querySelector(".gameover");
 const tryAgain = document.querySelector("#tryAgain");
 const textbox = document.querySelector(".textbox");
+const counterText = document.querySelector(".counterText");
 let chances = 5;
 let random = "";
 
@@ -46,24 +47,25 @@ const reset = function () {
     }, 500);
   });
   random25();
-  chances = 5;
+  chances = 6;
 };
 
 reset();
+chances--;
 
 gamebox.addEventListener("click", function (e) {
   const clicked = e.target.closest(".card-inner");
-  if (!clicked) return;
-
   const numberClicked = Number(
     clicked.closest(".card-container").getAttribute("data-number")
   );
+
+  if (!clicked) return;
 
   if (chances > 0) {
     clicked.classList.add("flip-card");
   }
   console.log(numberClicked);
-  chances--;
+
   if (random === numberClicked) {
     const cardBack = clicked.querySelector(".card-back");
     cardBack.style.background = `linear-gradient(135deg, rgba(90,218,158,1) 33%, rgba(169,237,131,1) 66%)`;
@@ -82,7 +84,9 @@ gamebox.addEventListener("click", function (e) {
     }, 2000);
   }
 
-  if (random !== numberClicked && chances === 0) {
+  if (random !== numberClicked) {
+    chances--;
+    console.log(`chances${chances}`);
     const cardBack = clicked.querySelector(".card-back");
     cardBack.style.background = `linear-gradient(
       135deg,
@@ -90,17 +94,19 @@ gamebox.addEventListener("click", function (e) {
       rgba(175, 70, 121, 1) 66%
     )`;
     cardBack.classList.add("textbox");
-    console.log("Sorry!");
-    chances = 0;
-    cardBack.textContent = `Sorry!!`;
-    cardBack.classList.add("blinking");
-    setTimeout(function () {
-      cardBack.textContent = "Play Again?";
-      cardBack.classList.remove("blinking");
-      cardBack.addEventListener("click", function () {
-        gamebox.textContent = "";
-        reset();
-      });
-    }, 2000);
+    if (chances === 0) {
+      console.log("Sorry!");
+      cardBack.textContent = `Sorry!!`;
+      cardBack.classList.add("blinking");
+      setTimeout(function () {
+        cardBack.textContent = "Play Again?";
+        cardBack.classList.remove("blinking");
+        cardBack.addEventListener("click", function () {
+          gamebox.textContent = "";
+          reset();
+        });
+      }, 2000);
+    }
   }
+  counterText.innerHTML = `Chances left: ${chances}`;
 });
