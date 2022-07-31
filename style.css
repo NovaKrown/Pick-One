@@ -1,3 +1,43 @@
+:root {
+  --color1: #0e8db4;
+  --color2: #00a9bd;
+  --color3: #00c3b4;
+  --color4: #5ada9e;
+  --color5: #a9ed83;
+  --color6: #f9f871;
+
+  --color7: #0e8db4;
+  --color8: #3684bc;
+  --color9: #5e77bb;
+  --color10: #8268af;
+  --color11: #9e5698;
+  --color12: #af4679;
+
+  --grad1: linear-gradient(
+    135deg,
+    rgba(14, 141, 180, 1) 33%,
+    rgba(0, 195, 180, 1) 66%
+  );
+
+  --gradAlt: linear-gradient(
+    135deg,
+    rgba(14, 141, 180, 1) 33%,
+    rgba(0, 169, 189, 1) 66%
+  );
+
+  --grad2: linear-gradient(
+    135deg,
+    rgba(90, 218, 158, 1) 33%,
+    rgba(169, 237, 131, 1) 66%
+  );
+
+  --grad3: linear-gradient(
+    135deg,
+    rgba(158, 86, 152, 1) 10%,
+    rgba(175, 70, 121, 1) 90%
+  );
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +59,7 @@
   height: 95%;
   max-height: 95vw;
   aspect-ratio: 1/1;
-  background-color: #6a4c93;
+  background-color: #242424;
   display: flex;
   align-content: center;
   flex-flow: row wrap;
@@ -38,6 +78,7 @@
   transition: 500ms;
   border-radius: 10px;
   color: antiquewhite;
+  cursor: default;
 }
 
 .card-inner {
@@ -62,7 +103,11 @@
 }
 
 .card-front {
-  background-color: #1982c4;
+  background: linear-gradient(
+    135deg,
+    rgba(14, 141, 180, 1) 33%,
+    rgba(0, 169, 189, 1) 66%
+  );
   color: black;
   display: flex;
   justify-content: center;
@@ -70,9 +115,16 @@
 }
 
 .card-back {
-  background-color: #ff595e;
+  background: linear-gradient(
+    135deg,
+    rgba(158, 86, 152, 1) 33%,
+    rgba(175, 70, 121, 1) 66%
+  );
   color: white;
   transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .flip-card {
@@ -104,9 +156,7 @@
 }
 
 .textbox {
-  font-size: 6rem;
-  position: absolute;
-  top: 20%;
+  font-size: 16px;
   color: black;
 }
 
@@ -117,13 +167,20 @@
 
 .showLose {
   transform: translateX(0);
-  opacity: 1;
   z-index: 3;
   display: flex;
 }
 
+.opacity {
+  opacity: 1;
+}
+
 button {
-  background-color: #8ac926; /* Green */
+  background-color: linear-gradient(
+    135deg,
+    rgba(90, 218, 158, 1) 33%,
+    rgba(169, 237, 131, 1) 66%
+  );
   border: none;
   color: black;
   text-align: center;
@@ -138,6 +195,27 @@ button {
 }
 
 .tabs {
-  font-size: 6rem;
+  font-size: 32px;
   color: black;
+}
+
+.blinking {
+  animation: blinkingText 0.3s infinite;
+}
+@keyframes blinkingText {
+  0% {
+    color: #000;
+  }
+  49% {
+    color: #000;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
 }
