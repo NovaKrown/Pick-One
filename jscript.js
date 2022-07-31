@@ -7,6 +7,8 @@ const counterText = document.querySelector(".counterText");
 let chances = 5;
 let random = "";
 
+counterText.innerHTML = `Chances left: ${chances}`;
+
 const random25 = function () {
   random = Math.floor(Math.random() * 25 + 1);
   console.log(random);
@@ -48,6 +50,7 @@ const reset = function () {
   });
   random25();
   chances = 6;
+  counterText.innerHTML = `Chances left: ${chances - 1}`;
 };
 
 reset();
@@ -74,6 +77,7 @@ gamebox.addEventListener("click", function (e) {
     chances = 0;
     cardBack.textContent = `Winner!!`;
     cardBack.classList.add("blinking");
+    counterText.innerHTML = `Chances left:`;
     setTimeout(function () {
       cardBack.textContent = "Play Again?";
       cardBack.classList.remove("blinking");
@@ -98,15 +102,19 @@ gamebox.addEventListener("click", function (e) {
       console.log("Sorry!");
       cardBack.textContent = `Sorry!!`;
       cardBack.classList.add("blinking");
+      counterText.innerHTML = `Chances left: 0`;
       setTimeout(function () {
         cardBack.textContent = "Play Again?";
         cardBack.classList.remove("blinking");
         cardBack.addEventListener("click", function () {
           gamebox.textContent = "";
+          chances = 0;
           reset();
         });
       }, 2000);
     }
   }
-  counterText.innerHTML = `Chances left: ${chances}`;
+  if (chances > 0 && chances < 5) {
+    counterText.innerHTML = `Chances left: ${chances}`;
+  }
 });
